@@ -71,3 +71,15 @@ if st.button("Predict Energy Usage"):
         st.success(f"Predicted Usage_kWh: {float(prediction[0]):.2f}")
     except Exception as e:
         st.error(f"Error: {e}")
+        import streamlit as st
+import pickle
+import numpy as np
+from pathlib import Path
+
+@st.cache_resource
+def load_model():
+    model_path = Path(__file__).parent / "model.pkl"
+    with open(model_path, "rb") as f:
+        return pickle.load(f)
+
+model = load_model()
